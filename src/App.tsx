@@ -1,9 +1,13 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import ApiContainer from './components/ApiContainer';
 
 function App() {
-  return <div className="App"></div>;
+  return (
+    <div className="App">
+      <ApiContainer />
+    </div>
+  );
 }
 
 export default App;
