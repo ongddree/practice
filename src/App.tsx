@@ -1,13 +1,16 @@
 import React from 'react';
 import './App.css';
-import ApiContainer from './components/ApiContainer';
-import Toggle from './components/Toggle';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import CodingApiPage from './pages/CodingApiPage';
 
 function App() {
   return (
     <div className="App">
-      <Toggle />
-      {/* <ApiContainer /> */}
+      <BrowserRouter>
+        <Routes>
+          <Route path="/codingApi" element={<CodingApiPage />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
