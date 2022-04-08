@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { CodingResourcesType } from '../@types/CodingResources';
-import { API_ENDPOINT } from '../constant';
+import { API_ENDPOINT } from '../constants';
 import VideoCard from './VideoCard';
 
 const ApiContainer = () => {
