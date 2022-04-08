@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useReducer } from 'react';
 import CreateUser from '../components/react/CreateUser';
 import UserList from '../components/react/UserList';
 
@@ -24,16 +24,19 @@ const MemoPage = () => {
       id: 1,
       username: 'velopert',
       email: 'public.velopert@gmail.com',
+      active: true,
     },
     {
       id: 2,
       username: 'tester',
       email: 'tester@example.com',
+      active: false,
     },
     {
       id: 3,
       username: 'liz',
       email: 'liz@example.com',
+      active: false,
     },
   ]);
 
@@ -44,6 +47,7 @@ const MemoPage = () => {
       id: nextId.current,
       username,
       email,
+      active: true,
     };
 
     // 불변성을 지키며 배열 추가하는 방법
@@ -59,8 +63,16 @@ const MemoPage = () => {
     nextId.current += 1;
   };
 
-  const onRemove = (num: number) => {
-    setUsers(users.filter((ele) => ele.id !== num));
+  const onRemove = (id: number) => {
+    setUsers(users.filter((ele) => ele.id !== id));
+  };
+
+  const onToggle = (id: number) => {
+    setUsers(
+      users.map((user, i) =>
+        user.id === id ? { ...user, active: !user.active } : user
+      )
+    );
   };
 
   return (
@@ -71,7 +83,7 @@ const MemoPage = () => {
         onChange={onChange}
         onCreate={onCreate}
       />
-      <UserList users={users} onRemove={onRemove} />
+      <UserList users={users} onRemove={onRemove} onToggle={onToggle} />
     </div>
   );
 };
