@@ -1,6 +1,5 @@
-import React, { useState, useRef, useReducer } from 'react';
-import CreateUser from '../components/react/CreateUser';
-import UserList from '../components/react/UserList';
+import React, { useState, useRef, useMemo } from 'react';
+import { CreateUser, UserList } from '../components/react';
 
 const MemoPage = () => {
   // TODO: input 입력값을 onChange로 상태관리해야하나??
@@ -75,6 +74,15 @@ const MemoPage = () => {
     );
   };
 
+  function countActiveUsers(users: Array<{ active: boolean }>) {
+    console.log('활성 사용자 수 계산중...');
+    return users.filter((user) => user.active).length;
+  }
+  //input입력 값이 바뀔 때마다 memopage의 state가 바뀌면서 리렌더링. 그러면 input값을 onChange를
+
+  //useMemo(어떻게 연산할지 정의하는 함수, deps)
+  const count = useMemo(() => countActiveUsers(users), [users]);
+
   return (
     <div>
       <CreateUser
@@ -84,6 +92,7 @@ const MemoPage = () => {
         onCreate={onCreate}
       />
       <UserList users={users} onRemove={onRemove} onToggle={onToggle} />
+      <div>활성 사용자 수 : {count}</div>
     </div>
   );
 };
