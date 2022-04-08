@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { useEffect } from 'react';
 interface UserType {
   id: number;
   username: string;
@@ -20,6 +21,13 @@ interface UsersProps {
 
 // TODO: UserType 바로 적용 안되는 이유
 function User({ user, onRemove, onToggle }: UserProps) {
+  //useEffect안에서 사용하는 props나 상태가 있으면 , 꼭 deps를 넣어야 useEffect 에 등록한 함수가 최신 상태를 가리키게 됨
+  // TODO: useEffect mount,unmount 다시 정리
+  // useEffect(() => {
+  //   console.log(user);
+  //   console.log('실행');
+  // }, [user]);
+
   return (
     <div>
       <UserName
