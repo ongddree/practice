@@ -1,4 +1,4 @@
-import React, { useState, useRef, useMemo } from 'react';
+import React, { useState, useRef, useMemo, useCallback } from 'react';
 import { CreateUser, UserList } from '../components/react';
 
 const MemoPage = () => {
@@ -62,17 +62,23 @@ const MemoPage = () => {
     nextId.current += 1;
   };
 
-  const onRemove = (id: number) => {
-    setUsers(users.filter((ele) => ele.id !== id));
-  };
+  const onRemove = useCallback(
+    (id: number) => {
+      setUsers(users.filter((ele) => ele.id !== id));
+    },
+    [users]
+  );
 
-  const onToggle = (id: number) => {
-    setUsers(
-      users.map((user, i) =>
-        user.id === id ? { ...user, active: !user.active } : user
-      )
-    );
-  };
+  const onToggle = useCallback(
+    (id: number) => {
+      setUsers(
+        users.map((user, i) =>
+          user.id === id ? { ...user, active: !user.active } : user
+        )
+      );
+    },
+    [users]
+  );
 
   function countActiveUsers(users: Array<{ active: boolean }>) {
     console.log('활성 사용자 수 계산중...');
