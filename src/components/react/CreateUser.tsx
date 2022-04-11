@@ -1,3 +1,4 @@
+import React from 'react';
 interface CreateUserProps {
   username: string;
   email: string;
@@ -25,4 +26,4 @@ function CreateUser({ username, email, onChange, onCreate }: CreateUserProps) {
   );
 }
 
-export default CreateUser;
+export default React.memo(CreateUser);

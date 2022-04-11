@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from 'styled-components';
 import { useEffect } from 'react';
 interface UserType {
@@ -20,7 +21,7 @@ interface UsersProps {
 }
 
 // TODO: UserType 바로 적용 안되는 이유
-function User({ user, onRemove, onToggle }: UserProps) {
+const User = React.memo(function User({ user, onRemove, onToggle }: UserProps) {
   //useEffect안에서 사용하는 props나 상태가 있으면 , 꼭 deps를 넣어야 useEffect 에 등록한 함수가 최신 상태를 가리키게 됨
   // TODO: useEffect mount,unmount 다시 정리
   // useEffect(() => {
@@ -42,7 +43,7 @@ function User({ user, onRemove, onToggle }: UserProps) {
       <button onClick={() => onRemove(user.id)}>삭제</button>
     </div>
   );
-}
+});
 
 function UserList({ users, onRemove, onToggle }: UsersProps) {
   return (
@@ -59,7 +60,7 @@ function UserList({ users, onRemove, onToggle }: UsersProps) {
   );
 }
 
-export default UserList;
+export default React.memo(UserList);
 
 const UserName = styled.b<{ active: boolean }>`
   ${({ active }) => (active ? 'color:green' : 'color:black')}
