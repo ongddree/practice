@@ -2,7 +2,6 @@ import React, { useState, useRef, useMemo, useCallback } from 'react';
 import { CreateUser, UserList } from '../components/react';
 
 const MemoPage = () => {
-  // TODO: input 입력값을 onChange로 상태관리해야하나??
   const [inputs, setInputs] = useState({
     username: '',
     email: '',
@@ -10,13 +9,13 @@ const MemoPage = () => {
 
   const { username, email } = inputs;
 
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setInputs({
       ...inputs,
       [name]: value,
     });
-  };
+  }, []);
 
   const [users, setUsers] = useState([
     {
@@ -41,7 +40,7 @@ const MemoPage = () => {
 
   const nextId = useRef(4);
 
-  const onCreate = () => {
+  const onCreate = useCallback(() => {
     const user = {
       id: nextId.current,
       username,
@@ -54,31 +53,27 @@ const MemoPage = () => {
     setUsers([...users, user]);
     // 2. concat 사용하기
     // 기존의 배열을 수정하지않고, 새로운 원소가 추가된 새로운 배열을 만들어줌.
-    setUsers(users.concat(user));
+    setUsers((users) => users.concat(user));
     setInputs({
       username: '',
       email: '',
     });
     nextId.current += 1;
-  };
+  }, [username, email]);
 
-  const onRemove = useCallback(
-    (id: number) => {
-      setUsers(users.filter((ele) => ele.id !== id));
-    },
-    [users]
-  );
+  //useCallback에서 의존성 배열을 빈 배열로 넣어두어 setstate를 함수형 업데이트 함으로써 최신 상태값 참조.
 
-  const onToggle = useCallback(
-    (id: number) => {
-      setUsers(
-        users.map((user, i) =>
-          user.id === id ? { ...user, active: !user.active } : user
-        )
-      );
-    },
-    [users]
-  );
+  const onRemove = useCallback((id: number) => {
+    setUsers((users) => users.filter((ele) => ele.id !== id));
+  }, []);
+
+  const onToggle = useCallback((id: number) => {
+    setUsers((users) =>
+      users.map((user) =>
+        user.id === id ? { ...user, active: !user.active } : user
+      )
+    );
+  }, []);
 
   function countActiveUsers(users: Array<{ active: boolean }>) {
     console.log('활성 사용자 수 계산중...');

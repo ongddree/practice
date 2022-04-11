@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useEffect } from 'react';
 interface UserType {
   id: number;
   username: string;
