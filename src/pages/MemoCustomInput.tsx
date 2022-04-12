@@ -6,18 +6,16 @@ import {
   REMOVE_USER,
   TOGGLE_USER,
 } from '../@types/UserListActions';
-import { StateInterface, Action } from '../@types/Interface';
+import { StateInterface, UserInterface, Action } from '../@types/Interface';
+import useInputs from '../hooks/useInputs';
 
 function countActiveUsers(users: Array<{ active: boolean }>) {
   console.log('활성 사용자 수 계산중...');
   return users.filter((user) => user.active).length;
 }
 
-const initialState: StateInterface = {
-  inputs: {
-    username: '',
-    email: '',
-  },
+//TODO: 타입 지정
+const initialState: any = {
   users: [
     {
       id: 1,
@@ -42,16 +40,6 @@ const initialState: StateInterface = {
 
 function reducer(state: StateInterface, action: Action): StateInterface {
   switch (action.type) {
-    case CHANGE_INPUT:
-      //spread 연산자 : reducer 함수에서 새로운 상태를 만들 때 불변성 지켜야함
-      return {
-        ...state,
-        inputs: {
-          ...state.inputs,
-          [action.payload.name]: action.payload.value,
-        },
-      };
-
     case CREATE_USER:
       return {
         inputs: initialState.inputs,
@@ -79,24 +67,15 @@ function reducer(state: StateInterface, action: Action): StateInterface {
 }
 
 const MemoCustomInputPage = () => {
+  const [{ username, email }, onChange, reset] = useInputs({
+    username: '',
+    email: '',
+  });
+
   const [state, dispatch] = useReducer(reducer, initialState);
-  const { users } = state;
-  const { username, email } = state.inputs;
   const nextId = useRef(4);
 
-  const onChange = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>): void => {
-      const { name, value } = e.target;
-      dispatch({
-        type: CHANGE_INPUT,
-        payload: {
-          name,
-          value,
-        },
-      });
-    },
-    []
-  );
+  const { users } = state;
 
   const onCreate = useCallback(() => {
     dispatch({
