@@ -1,5 +1,6 @@
-import CodingApiPage from './CodingApiPage';
-import MemoPage from './MemoPage';
-import MemoReducerPage from './MemoReducerPage';
+import CodingApiPage from './CodingApi';
+import MemoPage from './Memo';
+import MemoReducerPage from './MemoReducer';
+import MemoCustomInputPage from './MemoCustomInput';
 
-export { MemoReducerPage, CodingApiPage, MemoPage };
+export { MemoReducerPage, CodingApiPage, MemoPage, MemoCustomInputPage };
