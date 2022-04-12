@@ -11,10 +11,10 @@ const MemoPage = () => {
 
   const onChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setInputs({
+    setInputs((inputs) => ({
       ...inputs,
       [name]: value,
-    });
+    }));
   }, []);
 
   const [users, setUsers] = useState([
