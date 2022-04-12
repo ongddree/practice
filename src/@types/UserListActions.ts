@@ -1,0 +1,6 @@
+const CHANGE_INPUT: string = 'CHANGE_INPUT';
+const CREATE_USER: string = 'CREATE_USER';
+const REMOVE_USER: string = 'REMOVE_USER';
+const TOGGLE_USER: string = 'TOGGLE_USER';
+
+export { CHANGE_INPUT, CREATE_USER, REMOVE_USER, TOGGLE_USER };
