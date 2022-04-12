@@ -5,11 +5,13 @@ interface UserInterface {
   active: boolean;
 }
 
+interface InputInterface {
+  username: string;
+  email: string;
+}
+
 interface StateInterface {
-  inputs: {
-    username: string;
-    email: string;
-  };
+  inputs: InputInterface;
   users: UserInterface[];
 }
 
@@ -18,4 +20,4 @@ interface Action {
   payload: any;
 }
 
-export type { UserInterface, StateInterface, Action };
+export type { UserInterface, InputInterface, StateInterface, Action };
