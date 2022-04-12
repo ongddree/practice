@@ -1,6 +1,4 @@
 import React, { useReducer } from 'react';
-import { useState } from 'react';
-import { isNumericLiteral } from 'typescript';
 
 type Action = { type: 'INCREASE' } | { type: 'DECREASE' };
 
@@ -41,4 +39,5 @@ const Counter = () => {
     </div>
   );
 };
+
 export default Counter;

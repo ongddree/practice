@@ -1,13 +1,13 @@
 import { useCallback, useReducer, useRef, useMemo } from 'react';
-import { CreateUser, UserList } from '../components/react';
+import { CreateUser, UserList } from 'components/react';
 import {
   CHANGE_INPUT,
   CREATE_USER,
   REMOVE_USER,
   TOGGLE_USER,
-} from '../@types/UserListActions';
-import { StateInterface, UserInterface, Action } from '../@types/Interface';
-import useInputs from '../hooks/useInputs';
+} from 'types/UserListActions';
+import { StateInterface, Action } from 'types/Interface';
+import useInputs from 'hooks/useInputs';
 
 function countActiveUsers(users: Array<{ active: boolean }>) {
   console.log('활성 사용자 수 계산중...');

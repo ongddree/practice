@@ -1,5 +1,5 @@
 import React, { useState, useRef, useMemo, useCallback } from 'react';
-import { CreateUser, UserList } from '../components/react';
+import { CreateUser, UserList } from 'components/react';
 
 const MemoPage = () => {
   const [inputs, setInputs] = useState({

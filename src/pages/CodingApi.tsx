@@ -1,4 +1,4 @@
-import ApiContainer from '../components/ApiContainer';
+import ApiContainer from 'components/ApiContainer';
 
 const CodingApiPage = () => {
   return <ApiContainer />;
