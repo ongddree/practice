@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { CodingResourcesType } from '../@types/CodingResources';
+import { CodingResourcesType } from 'types/CodingResources';
 
 interface VideoCardProps {
   videoData: CodingResourcesType;

@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react';
-import { InputInterface } from '../@types/Interface';
+import { InputInterface } from 'types/Interface';
 
 function useInputs(initialForm: InputInterface) {
   const [form, setForm] = useState(initialForm);
