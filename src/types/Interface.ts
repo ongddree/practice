@@ -20,4 +20,16 @@ interface Action {
   payload: any;
 }
 
-export type { UserInterface, InputInterface, StateInterface, Action };
+interface ListItemInterface {
+  id: number;
+  text: string;
+  done: boolean;
+}
+
+export type {
+  UserInterface,
+  InputInterface,
+  StateInterface,
+  ListItemInterface,
+  Action,
+};
