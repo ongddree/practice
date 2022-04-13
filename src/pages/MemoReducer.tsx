@@ -7,6 +7,7 @@ import {
   TOGGLE_USER,
 } from 'types/UserListActions';
 import { StateInterface, Action } from 'types/Interface';
+import produce from 'immer';
 
 function countActiveUsers(users: Array<{ active: boolean }>) {
   console.log('활성 사용자 수 계산중...');
@@ -40,10 +41,10 @@ const initialState: StateInterface = {
   ],
 };
 
+//현재 상태와 액션 객체를 파라미터로 받음
 function reducer(state: StateInterface, action: Action): StateInterface {
   switch (action.type) {
     case CHANGE_INPUT:
-      //spread 연산자 : reducer 함수에서 새로운 상태를 만들 때 불변성 지켜야함
       return {
         ...state,
         inputs: {
@@ -58,21 +59,31 @@ function reducer(state: StateInterface, action: Action): StateInterface {
         users: state.users.concat(action.payload.user),
       };
 
+    // case TOGGLE_USER:
+    //   return {
+    //     ...state,
+    //     users: state.users.map((user) =>
+    //       user.id === action.payload.id
+    //         ? { ...user, active: !user.active }
+    //         : user
+    //     ),
+    //   };
+
     case TOGGLE_USER:
-      return {
-        ...state,
-        users: state.users.map((user) =>
-          user.id === action.payload.id
-            ? { ...user, active: !user.active }
-            : user
-        ),
-      };
+      return produce(state, (draft) => {
+        const user = draft.users.find((user) => user.id === action.payload.id);
+        if (user) {
+          user.active = !user.active;
+        }
+      });
 
     case REMOVE_USER:
-      return {
-        ...state,
-        users: state.users.filter((user) => user.id !== action.payload.id),
-      };
+      return produce(state, (draft) => {
+        const index = draft.users.findIndex(
+          (user) => user.id === action.payload.id
+        );
+        draft.users.splice(index, 1);
+      });
     default:
       return state;
   }
