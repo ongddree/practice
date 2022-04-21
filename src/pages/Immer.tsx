@@ -9,5 +9,3 @@ const state = {
 const nextState = produce(state, (draft) => {
   draft.number += 1;
 });
-
-console.log(nextState);

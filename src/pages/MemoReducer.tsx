@@ -10,7 +10,6 @@ import { StateInterface, Action } from 'types/Interface';
 import produce from 'immer';
 
 function countActiveUsers(users: Array<{ active: boolean }>) {
-  console.log('활성 사용자 수 계산중...');
   return users.filter((user) => user.active).length;
 }
 
