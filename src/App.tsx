@@ -6,6 +6,7 @@ import {
   MemoPage,
   MemoReducerPage,
   MemoCustomInputPage,
+  DebouncePage,
 } from './pages';
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
           <Route path="/memo" element={<MemoPage />} />
           <Route path="/memoReducer" element={<MemoReducerPage />} />
           <Route path="/memoCustom" element={<MemoCustomInputPage />} />
+          <Route path="/debounce" element={<DebouncePage />} />
         </Routes>
       </BrowserRouter>
     </div>
