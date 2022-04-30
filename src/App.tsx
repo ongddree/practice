@@ -7,6 +7,7 @@ import {
   MemoReducerPage,
   MemoCustomInputPage,
   DebouncePage,
+  FetchTestPage,
 } from './pages';
 
 function App() {
@@ -14,11 +15,12 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path="/codingApi" element={<CodingApiPage />} />
+          <Route path="/coding-api" element={<CodingApiPage />} />
           <Route path="/memo" element={<MemoPage />} />
-          <Route path="/memoReducer" element={<MemoReducerPage />} />
-          <Route path="/memoCustom" element={<MemoCustomInputPage />} />
+          <Route path="/memo-reducer" element={<MemoReducerPage />} />
+          <Route path="/memo-custom" element={<MemoCustomInputPage />} />
           <Route path="/debounce" element={<DebouncePage />} />
+          <Route path="/fetch-test" element={<FetchTestPage />} />
         </Routes>
       </BrowserRouter>
     </div>
