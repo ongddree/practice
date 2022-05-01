@@ -1,5 +1,7 @@
-import { useQuery } from 'react-query';
+import { useQuery, useQueries } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
+import axios from 'axios';
+import { SPACELOG_API_ENDPOINT } from 'constants/index';
 
 interface TestData {
   name: string;
@@ -17,6 +19,20 @@ const FetchTestPage = () => {
         (res) => res.json()
       )
   );
+
+  //비동기 여러개 실행할 경우
+  const result = useQueries([
+    {
+      queryKey: ['post'],
+      queryFn: () => axios.get(`${SPACELOG_API_ENDPOINT}/posts`),
+    },
+    {
+      queryKey: ['user'],
+      queryFn: () => axios.get(`${SPACELOG_API_ENDPOINT}/userinfos`),
+    },
+  ]);
+
+  console.log(result);
 
   if (isLoading) return <div>'Loading...';</div>;
   if (error) return <div>{error.message}</div>;
