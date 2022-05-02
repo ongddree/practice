@@ -1,7 +1,9 @@
 import { useQuery, useQueries } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import axios from 'axios';
+import { useEffect } from 'react';
 import { SPACELOG_API_ENDPOINT } from 'constants/index';
+import { Divider } from '@material-ui/core';
 
 interface TestData {
   name: string;
@@ -21,7 +23,7 @@ const FetchTestPage = () => {
   );
 
   //비동기 여러개 실행할 경우
-  const result = useQueries([
+  const results = useQueries([
     {
       queryKey: ['post'],
       queryFn: () => axios.get(`${SPACELOG_API_ENDPOINT}/posts`),
@@ -32,20 +34,23 @@ const FetchTestPage = () => {
     },
   ]);
 
-  console.log(result);
-
-  if (isLoading) return <div>'Loading...';</div>;
-  if (error) return <div>{error.message}</div>;
+  const isLoad = results.every((result) => result.isLoading);
 
   return (
     <div>
-      <h1>{data?.name}</h1>
-      <p>{data?.description}</p>
-      <strong>👀 {data?.subscribers_count}</strong>{' '}
-      <strong>✨ {data?.stargazers_count}</strong>{' '}
-      <strong>🍴 {data?.forks_count}</strong>
-      <div>{isFetching ? 'Updating...' : ''}</div>
-      <ReactQueryDevtools initialIsOpen />
+      {isLoad ? (
+        <div>로딩중</div>
+      ) : (
+        <div>
+          <h1>{data?.name}</h1>
+          <p>{data?.description}</p>
+          <strong>👀 {data?.subscribers_count}</strong>{' '}
+          <strong>✨ {data?.stargazers_count}</strong>{' '}
+          <strong>🍴 {data?.forks_count}</strong>
+          <div>{isFetching ? 'Updating...' : ''}</div>
+          <ReactQueryDevtools initialIsOpen />
+        </div>
+      )}
     </div>
   );
 };
