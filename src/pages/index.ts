@@ -1,15 +1,4 @@
-import CodingApiPage from './CodingApi';
-import MemoPage from './Memo';
-import MemoReducerPage from './MemoReducer';
-import MemoCustomInputPage from './MemoCustomInput';
-import DebouncePage from './Debounce';
+import RecoilTestPage from './RecoilTest';
 import FetchTestPage from './FetchTest';
 
-export {
-  MemoReducerPage,
-  CodingApiPage,
-  MemoPage,
-  MemoCustomInputPage,
-  DebouncePage,
-  FetchTestPage,
-};
+export { RecoilTestPage, FetchTestPage };
